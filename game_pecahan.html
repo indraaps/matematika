@@ -389,9 +389,11 @@
             const xpEarned = SpaceStore.addXP(100, timeBonus);
             gameXP += xpEarned;
             score += xpEarned;
-            document.getElementById('feedback').innerHTML = `<span class="fb-correct">✅ Benar! +${xpEarned} XP ${SpaceStore.get('isOnFire') ? '🔥' : ''}</span>`;
+            const q = questions[currentQ];
+            document.getElementById('feedback').innerHTML = `<span class="fb-correct">✅ Benar! +${xpEarned} XP ${SpaceStore.get('isOnFire') ? '🔥' : ''}<br><span style="font-size:0.95rem; color:#27ae60;"><b>Penjelasan:</b> ${q.hint}</span></span>`;
             updateComboUI();
             
+            // Waktu tunggu ditambah agar siswa bisa membaca penjelasan
             setTimeout(() => {
                 currentQ++;
                 if (currentQ >= questions.length) {
@@ -433,7 +435,7 @@
                 } else {
                     loadQuestion();
                 }
-            }, 1000);
+            }, 3500); // 3.5 detik untuk membaca penjelasan
         }
 
         function handleWrong(qId) {

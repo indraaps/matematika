@@ -20,6 +20,7 @@ const SpaceStore = {
       lessonProgress: { mission1: false, mission2: false, mission3: false, mission4: false, mission5: false },
       quizScores: {},
       reflections: [],
+      feedbacks: [],
       isMusicPlaying: false,
       totalCorrect: 0,
       totalAnswered: 0,
@@ -159,16 +160,98 @@ const SpaceStore = {
     }
   },
 
-  // ============ REFLECTION ============
+  // ============ REFLECTION & FEEDBACK ============
+  // Data feedback dan refleksi disimpan TERPISAH dari state siswa
+  // agar tidak hilang/tertimpa saat siswa baru login.
   addReflection(text, mood) {
-    this._state.reflections.push({ text, mood, date: new Date().toISOString() });
-    this._save();
+    const reflections = JSON.parse(localStorage.getItem('rimbaReflections') || '[]');
+    reflections.push({
+      text,
+      mood,
+      date: new Date().toISOString(),
+      username: this._state.username,
+      kelas: this._state.kelas
+    });
+    localStorage.setItem('rimbaReflections', JSON.stringify(reflections));
+  },
+
+  addFeedback(text, username, kelas) {
+    const feedbacks = JSON.parse(localStorage.getItem('rimbaFeedbacks') || '[]');
+    feedbacks.push({
+      text,
+      username: username || this._state.username,
+      kelas: kelas || this._state.kelas,
+      date: new Date().toISOString()
+    });
+    localStorage.setItem('rimbaFeedbacks', JSON.stringify(feedbacks));
+  },
+
+  getAllReflections() {
+    return JSON.parse(localStorage.getItem('rimbaReflections') || '[]');
+  },
+
+  getAllFeedbacks() {
+    return JSON.parse(localStorage.getItem('rimbaFeedbacks') || '[]');
+  },
+
+  exportToJSON() {
+    const exportData = {
+      reflections: this.getAllReflections(),
+      feedbacks: this.getAllFeedbacks(),
+      exportDate: new Date().toISOString(),
+      exportFrom: window.location.hostname || 'local'
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+    const a = document.createElement('a');
+    a.href = dataStr;
+    a.download = "data_admin_rimba_pecahan.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  },
+
+  importFromJSON(jsonString) {
+    try {
+      const imported = JSON.parse(jsonString);
+      // Ambil data yang sudah ada
+      const existingRefl = this.getAllReflections();
+      const existingFb = this.getAllFeedbacks();
+
+      // Gabungkan — cek duplikasi berdasarkan tanggal+teks
+      if (imported.reflections && Array.isArray(imported.reflections)) {
+        imported.reflections.forEach(r => {
+          const isDuplicate = existingRefl.some(e => e.date === r.date && e.text === r.text);
+          if (!isDuplicate) existingRefl.push(r);
+        });
+        localStorage.setItem('rimbaReflections', JSON.stringify(existingRefl));
+      }
+      if (imported.feedbacks && Array.isArray(imported.feedbacks)) {
+        imported.feedbacks.forEach(f => {
+          const isDuplicate = existingFb.some(e => e.date === f.date && e.text === f.text);
+          if (!isDuplicate) existingFb.push(f);
+        });
+        localStorage.setItem('rimbaFeedbacks', JSON.stringify(existingFb));
+      }
+      this._notify();
+      return true;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
+
+  clearAllFeedbackData() {
+    localStorage.removeItem('rimbaReflections');
+    localStorage.removeItem('rimbaFeedbacks');
+    this._notify();
   },
 
   // ============ RESET ============
   resetAll() {
     localStorage.removeItem('rimbaAjaibState');
     localStorage.removeItem('spaceAdventureState');
+    localStorage.removeItem('rimbaReflections');
+    localStorage.removeItem('rimbaFeedbacks');
     localStorage.removeItem('username');
     localStorage.removeItem('kelas');
     this._state = this.getDefaultState();

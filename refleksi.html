@@ -90,11 +90,11 @@
                 el.innerHTML = ''; 
                 return; 
             }
-            const refs = SpaceStore.get('reflections') || [];
+            const refs = SpaceStore.getAllReflections();
             if (refs.length === 0) { el.innerHTML = ''; return; }
             el.innerHTML = '<div style="font-weight:800;margin-bottom:10px;font-size:1.1rem;color:var(--forest-mid)">📝 Catatan Sebelumnya (Mode Admin)</div>' +
                 refs.slice().reverse().map(r =>
-                    `<div class="refl-entry"><div class="date">${r.mood} ${new Date(r.date).toLocaleString('id-ID')}</div><div class="text">${r.text}</div></div>`
+                    `<div class="refl-entry"><div class="date">${r.mood} ${r.username || 'Anonim'} — ${new Date(r.date).toLocaleString('id-ID')}</div><div class="text">${r.text}</div></div>`
                 ).join('');
         }
         renderPastReflections();

@@ -193,42 +193,31 @@
                 <hr class="divider">
 
                 <div class="review-section" style="text-align:center">
-                    <div class="section-title">Beri Review & Bagikan Perasaanmu!</div>
+                    <div class="section-title">Kolom Saran & Masukan</div>
 
                     <div class="review-q">
-                        <p>1. Bagaimana perasaanmu belajar hari ini?</p>
-                        <div class="rating-row" id="moodRow">
-                            <button class="r-btn r-emoji" data-group="mood" onclick="selectRating(this)" title="Senang Sekali">🤩</button>
-                            <button class="r-btn r-emoji" data-group="mood" onclick="selectRating(this)" title="Senang">😊</button>
-                            <button class="r-btn r-emoji" data-group="mood" onclick="selectRating(this)" title="Biasa Saja">🤔</button>
-                            <button class="r-btn r-emoji" data-group="mood" onclick="selectRating(this)" title="Sedih">😔</button>
-                        </div>
+                        <p style="margin-bottom:10px; font-weight:normal; color:#555;">Punya saran atau masukan untuk aplikasi Rimba Pecahan? Tulis di bawah ini ya!</p>
+                        <textarea id="saranText" style="width:100%; min-height:120px; border-radius:12px; padding:15px; font-family:'Nunito', sans-serif; font-size:1rem; border:2px solid rgba(45,138,78,0.3);" placeholder="Tulis saranmu di sini..."></textarea>
                     </div>
 
-                    <div class="review-q">
-                        <p>2. Apakah materinya mudah dipahami?</p>
-                        <div class="rating-row" id="understandRow">
-                            <button class="r-btn r-text" data-group="understand" onclick="selectRating(this)"><span>✅</span> Gampang banget!</button>
-                            <button class="r-btn r-text" data-group="understand" onclick="selectRating(this)"><span>🟡</span> Lumayan paham.</button>
-                            <button class="r-btn r-text" data-group="understand" onclick="selectRating(this)"><span>❌</span> Masih bingung.</button>
-                        </div>
-                    </div>
-
-                    <button class="btn-gold" style="margin-top:20px" onclick="submitReview()">Kirim Review 🚀</button>
+                    <button class="btn-gold" style="margin-top:20px" onclick="submitSaran()">Kirim Saran 🚀</button>
                 </div>
             </div>
         </main>`);
 
-        function selectRating(btn) {
-            const group = btn.dataset.group;
-            document.querySelectorAll(`.r-btn[data-group='${group}']`).forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+        function submitSaran() {
+            const text = document.getElementById('saranText').value.trim();
+            if (!text) {
+                alert('Tulis saranmu dulu ya! 😊');
+                return;
+            }
+            const s = SpaceStore.get();
+            // Simpan saran ke dalam sistem (akan ditambahkan di script.js)
+            SpaceStore.addFeedback(text, s.username, s.kelas);
+            
             if(typeof AudioManager !== 'undefined') AudioManager.playClick();
-        }
-
-        function submitReview() {
-            alert('Terima kasih reviewnya! 🌿');
-            window.location.href = 'dashboard.html';
+            alert('Terima kasih atas saran dan masukanmu! 🌿');
+            document.getElementById('saranText').value = '';
         }
     </script>
 </body>
