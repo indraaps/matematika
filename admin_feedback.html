@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Admin - Data Feedback & Refleksi Siswa">
+    <title>Admin - Feedback & Refleksi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-panel { max-width: 900px; margin: 24px auto; background: rgba(255,255,255,0.9); padding: 24px; border-radius: var(--radius-md); }
+        .feedback-card { background: white; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 5px solid var(--forest-mid); }
+        .feedback-header { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.9rem; color: #555; }
+        .feedback-mood { font-size: 1.5rem; }
+        .feedback-text { font-size: 1.1rem; color: #333; line-height: 1.5; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(45, 138, 78, 0.2); }
+        th { background: var(--forest-dark); color: white; border-radius: 4px 4px 0 0; }
+        tr:nth-child(even) { background-color: rgba(45, 138, 78, 0.05); }
+    </style>
+</head>
+<body>
+    <script src="js/script.js"></script>
+    <script>
+        if (localStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        renderTopNav('👑 Admin Feedback', false);
+        
+        const s = SpaceStore.get();
+        const reflections = s.reflections || [];
+
+        let html = `
+        <main class="page-container">
+            <div class="glass-panel admin-panel">
+                <div class="section-heading">👑 Data Feedback / Refleksi Siswa</div>
+                <div class="section-subtitle">Daftar catatan hutan yang dikirim oleh pengguna di perangkat ini.</div>
+                
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <button class="btn-secondary" onclick="logoutAdmin()" style="background: #95a5a6; color: white; border: none;">Keluar (Logout)</button>
+                    <button class="btn-primary" onclick="clearFeedback()" style="background: #e74c3c; border-color: #c0392b;">🗑️ Hapus Semua Data</button>
+                </div>
+        `;
+
+        if (reflections.length === 0) {
+            html += `<div style="text-align:center; padding: 40px; background: rgba(255,255,255,0.5); border-radius: 12px;">
+                        <span style="font-size: 3rem;">🍃</span>
+                        <p style="color:#777; font-size:1.2rem; margin-top: 10px;">Belum ada feedback yang masuk.</p>
+                     </div>`;
+        } else {
+            html += `<table>
+                        <thead>
+                            <tr>
+                                <th style="width: 200px;">Waktu</th>
+                                <th style="width: 80px; text-align: center;">Mood</th>
+                                <th>Catatan / Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            reflections.slice().reverse().forEach(r => {
+                const dateStr = new Date(r.date).toLocaleString('id-ID', {
+                    day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+                html += `
+                    <tr>
+                        <td style="font-size: 0.9rem; color: #666;">${dateStr}</td>
+                        <td class="feedback-mood" style="text-align: center;">${r.mood}</td>
+                        <td class="feedback-text">${r.text}</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+        }
+
+        html += `
+            </div>
+        </main>`;
+        
+        document.body.insertAdjacentHTML('beforeend', html);
+
+        function clearFeedback() {
+            if(confirm('Apakah Anda yakin ingin menghapus semua data feedback? Data yang dihapus tidak dapat dikembalikan.')) {
+                SpaceStore.set({ reflections: [] });
+                location.reload();
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('isAdmin');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
