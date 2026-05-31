@@ -150,6 +150,7 @@
                         </div>
                     </div>
                     <a href="profil.html" class="btn-secondary" style="text-align:center;text-decoration:none;display:block" onclick="event.preventDefault();navigasiHalaman('profil.html')">🦉 Lihat Profil Lengkap</a>
+                    ${localStorage.getItem('isAdmin') === 'true' ? `<a href="admin_feedback.html" class="btn-primary" style="text-align:center;text-decoration:none;display:block;margin-top:10px;background:#e67e22;border-color:#d35400" onclick="event.preventDefault();navigasiHalaman('admin_feedback.html')">👑 Panel Admin Feedback</a>` : ''}
                 </aside>
 
                 <!-- MISSION MAP (Forest Path) -->

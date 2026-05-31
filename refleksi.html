@@ -85,12 +85,16 @@
         }
 
         function renderPastReflections() {
-            const refs = SpaceStore.get('reflections') || [];
             const el = document.getElementById('pastRefl');
+            if (localStorage.getItem('isAdmin') !== 'true') { 
+                el.innerHTML = ''; 
+                return; 
+            }
+            const refs = SpaceStore.get('reflections') || [];
             if (refs.length === 0) { el.innerHTML = ''; return; }
-            el.innerHTML = '<div style="font-weight:800;margin-bottom:10px;font-size:1.1rem;color:var(--forest-mid)">📝 Catatan Sebelumnya</div>' +
-                refs.slice(-3).reverse().map(r =>
-                    `<div class="refl-entry"><div class="date">${r.mood} ${new Date(r.date).toLocaleDateString('id-ID')}</div><div class="text">${r.text}</div></div>`
+            el.innerHTML = '<div style="font-weight:800;margin-bottom:10px;font-size:1.1rem;color:var(--forest-mid)">📝 Catatan Sebelumnya (Mode Admin)</div>' +
+                refs.slice().reverse().map(r =>
+                    `<div class="refl-entry"><div class="date">${r.mood} ${new Date(r.date).toLocaleString('id-ID')}</div><div class="text">${r.text}</div></div>`
                 ).join('');
         }
         renderPastReflections();

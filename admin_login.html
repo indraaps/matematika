@@ -49,8 +49,11 @@
             // Password default admin adalah: admin123
             if (pw === 'admin123') {
                 localStorage.setItem('isAdmin', 'true');
+                localStorage.setItem('username', 'Admin');
+                localStorage.setItem('kelas', '-');
+                SpaceStore.set({ username: 'Admin', kelas: '-' });
                 if(typeof AudioManager !== 'undefined') AudioManager.playClick();
-                navigasiHalaman('admin_feedback.html');
+                navigasiHalaman('dashboard.html');
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
                 if(typeof AudioManager !== 'undefined') AudioManager.playWrong();
