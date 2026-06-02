@@ -128,8 +128,9 @@
             <div class="dashboard-grid">
                 <!-- SIDEBAR -->
                 <aside class="sidebar">
-                    <div class="glass-panel profile-card">
-                        <div class="profile-avatar">🦉</div>
+                    <div class="kid-card profile-card">
+                        <div class="card-accent orange"></div>
+                        <div class="profile-avatar wiggle">🦉</div>
                         <div class="profile-name">${state.username}</div>
                         <div class="profile-class">Kelas ${state.kelas}</div>
                         <div class="rank-badge">${state.currentRank}</div>
@@ -143,8 +144,9 @@
                             <div class="stat-item"><div class="stat-val">${state.collectedBadges.length}</div><div class="stat-label">Lencana</div></div>
                         </div>
                     </div>
-                    <div class="glass-panel" style="padding:20px">
-                        <div style="font-weight:700;margin-bottom:8px;text-align:center;font-size:0.9rem;color:var(--forest-mid)">🎖️ Koleksi Lencana</div>
+                    <div class="kid-card" style="padding:20px; text-align: center;">
+                        <div class="card-accent blue"></div>
+                        <div style="font-weight:900;margin-bottom:12px;font-size:1.1rem;color:var(--forest-dark); font-family: 'Baloo 2';"><span class="bounce-emoji">🎖️</span> Koleksi Lencana</div>
                         <div class="badges-grid">
                             ${badgeSlots.map((b,i) => `<div class="badge-slot ${i < state.collectedBadges.length ? 'earned' : 'empty'}">${i < state.collectedBadges.length ? state.collectedBadges[i] : '🔒'}</div>`).join('')}
                         </div>
@@ -153,19 +155,20 @@
                 </aside>
 
                 <!-- MISSION MAP (Forest Path) -->
-                <section class="glass-panel mission-map-panel">
-                    <div class="map-title">🗺️ Peta Jalur Rimba</div>
+                <section class="kid-card mission-map-panel">
+                    <div class="card-accent green"></div>
+                    <div class="map-title" style="font-size: 2rem;"><span class="sparkle-text">🗺️ Peta Jalur Rimba</span></div>
                     <div class="mission-path">
                         ${missions.map((m, i) => {
                             const s = getMissionState(m, i);
                             const connectorClass = i > 0 ? (state.lessonProgress[missions[i-1].id] ? 'done' : '') : '';
                             const connector = i > 0 ? `<div class="mission-connector ${connectorClass}"></div>` : '';
                             return `${connector}
-                            <div class="mission-node ${s}" data-href="${m.href}" data-state="${s}" onclick="handleMissionClick(this)" style="animation: slideUp 0.6s ${i*0.15}s both">
-                                <div class="planet-icon">${m.icon}</div>
+                            <div class="mission-node ${s}" data-href="${m.href}" data-state="${s}" onclick="handleMissionClick(this)" style="animation: slideUp 0.6s ${i*0.15}s both; background: ${s === 'completed' ? 'rgba(39,174,96,0.1)' : s === 'unlocked' ? 'rgba(249,202,36,0.15)' : 'rgba(255,255,255,0.5)'}; border: 2px solid ${s === 'completed' ? 'var(--leaf-vivid)' : s === 'unlocked' ? 'var(--sunny-yellow)' : 'transparent'};">
+                                <div class="planet-icon ${s !== 'locked' ? 'bounce-emoji' : ''}">${m.icon}</div>
                                 <div class="mission-info">
-                                    <h3>${m.title}</h3>
-                                    <p>${m.desc}</p>
+                                    <h3 style="font-size: 1.25rem;">${m.title}</h3>
+                                    <p style="font-size: 0.95rem;">${m.desc}</p>
                                 </div>
                                 <div class="mission-status">${s === 'completed' ? '✅' : s === 'unlocked' ? '▶️' : '🔒'}</div>
                             </div>`;

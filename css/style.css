@@ -439,6 +439,168 @@ body {
 /* === CONTAINERS === */
 .page-container { max-width: 960px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
 
+/* === FUN CHILDREN UTILITIES === */
+.fun-callout {
+  background: linear-gradient(135deg, rgba(249,202,36,0.12), rgba(240,147,43,0.08));
+  border: 2px solid rgba(249,202,36,0.35);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+}
+.fun-callout::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(249,202,36,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.fun-callout.green {
+  background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(46,204,113,0.06));
+  border-color: rgba(39,174,96,0.3);
+}
+.fun-callout.blue {
+  background: linear-gradient(135deg, rgba(116,185,255,0.12), rgba(9,132,227,0.06));
+  border-color: rgba(116,185,255,0.35);
+}
+.fun-callout.pink {
+  background: linear-gradient(135deg, rgba(253,121,168,0.1), rgba(232,67,147,0.06));
+  border-color: rgba(253,121,168,0.3);
+}
+.fun-callout.purple {
+  background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(162,155,254,0.06));
+  border-color: rgba(108,92,231,0.3);
+}
+
+.bounce-emoji {
+  display: inline-block;
+  animation: bounceEmoji 2s ease-in-out infinite;
+  font-size: 2.5rem;
+}
+@keyframes bounceEmoji {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-5deg); }
+  75% { transform: translateY(-4px) rotate(5deg); }
+}
+
+.wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-3deg); }
+  30% { transform: rotate(3deg); }
+  45% { transform: rotate(-2deg); }
+  60% { transform: rotate(2deg); }
+  75% { transform: rotate(0deg); }
+}
+
+.rainbow-divider {
+  height: 4px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e74c3c, #f39c12, #f1c40f, #2ecc71, #3498db, #9b59b6);
+  background-size: 200% 100%;
+  animation: rainbowSlide 4s linear infinite;
+  margin: 24px 0;
+}
+@keyframes rainbowSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.sparkle-text {
+  position: relative;
+  display: inline-block;
+}
+.sparkle-text::after {
+  content: '✨';
+  position: absolute;
+  top: -8px; right: -18px;
+  font-size: 0.7em;
+  animation: sparkleRotate 2s ease-in-out infinite;
+}
+@keyframes sparkleRotate {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.3) rotate(20deg); opacity: 0.7; }
+}
+
+.kid-card {
+  background: white;
+  border: 3px solid rgba(45,138,78,0.15);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(45,138,78,0.06);
+  transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
+  position: relative;
+  overflow: hidden;
+}
+.kid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(45,138,78,0.12);
+  border-color: var(--sunny-yellow);
+}
+.kid-card .card-accent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 5px;
+}
+.kid-card .card-accent.orange { background: linear-gradient(90deg, #f39c12, #e67e22); }
+.kid-card .card-accent.green  { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+.kid-card .card-accent.blue   { background: linear-gradient(90deg, #3498db, #74b9ff); }
+.kid-card .card-accent.purple { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
+.kid-card .card-accent.pink   { background: linear-gradient(90deg, #fd79a8, #e84393); }
+.kid-card .card-accent.rainbow { background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71, #3498db, #9b59b6); }
+
+.floating-deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+  font-size: 2rem;
+  animation: floatDeco 6s ease-in-out infinite;
+}
+@keyframes floatDeco {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+/* Fun number display for fractions */
+.fraction-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--forest-dark);
+  line-height: 1;
+  padding: 8px 16px;
+}
+.fraction-display .numerator,
+.fraction-display .denominator {
+  padding: 2px 8px;
+}
+.fraction-display .fraction-line {
+  width: 100%;
+  height: 3px;
+  background: var(--forest-dark);
+  border-radius: 2px;
+  margin: 2px 0;
+}
+
+/* Achievement pop animation */
+@keyframes achievePop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.achieve-pop {
+  animation: achievePop 0.6s cubic-bezier(0.68,-0.55,0.265,1.55) forwards;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .top-nav { padding: 10px 16px; }
