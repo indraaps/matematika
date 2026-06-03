@@ -8,20 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .game-panel { max-width: 800px; margin: 24px auto; padding: 24px;}
-        .tabs-container { overflow-x: auto; margin-bottom: 24px; padding-bottom: 8px;}
-        .tabs { display: flex; gap: 12px; min-width: max-content; }
-        .tab-btn {
-            background: rgba(45,138,78,0.1); border: 2px solid rgba(45,138,78,0.3);
-            font-family: 'Baloo 2'; font-size: 1.1rem; font-weight: 700;
-            padding: 10px 20px; border-radius: var(--radius-md); cursor: pointer;
-            color: var(--forest-dark); transition: all 0.3s ease;
-        }
-        .tab-btn:hover { background: rgba(45,138,78,0.2); }
-        .tab-btn.active { background: var(--leaf-vivid); color: white; border-color: var(--leaf-vivid); box-shadow: 0 4px 10px rgba(39,174,96,0.3); }
-        
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .question-list { display: flex; flex-direction: column; animation: fadeIn 0.8s ease; }
         
         .kid-card {
             background: white; border: 3px solid rgba(45,138,78,0.15);
@@ -75,238 +63,130 @@
         <div class="glass-panel game-panel">
             <h1 style="font-family:'Baloo 2'; color:var(--forest-dark); text-align:center; margin-bottom:20px;">Latihan Pecahan Interaktif</h1>
             
-            <div class="tabs-container">
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('tab-contoh')"><span class="bounce-emoji">📖</span> Contoh Soal</button>
-                    <button class="tab-btn" onclick="showTab('tab-mudah')"><span class="wiggle">⭐</span> Level Mudah</button>
-                    <button class="tab-btn" onclick="showTab('tab-sedang')"><span class="wiggle">⭐⭐</span> Level Sedang</button>
-                    <button class="tab-btn" onclick="showTab('tab-sulit')"><span class="wiggle">⭐⭐⭐</span> Level Sulit</button>
-                </div>
-            </div>
-
-            <!-- TAB CONTOH -->
-            <div id="tab-contoh" class="tab-content active">
+            <div class="question-list">
+                <!-- CONTOH SOAL -->
                 <div class="guide-box fun-callout yellow">
                     <strong style="color:var(--honey-orange); font-size:1.2rem;"><span class="bounce-emoji">💡</span> Panduan Mengerjakan:</strong><br>
                     Perhatikan visualisasi gambar pada setiap soal, baca pertanyaannya dengan teliti, dan klik salah satu pilihan jawaban (A, B, C, atau D). Setelah menjawab, kamu dapat melihat penjelasan lengkapnya!
-                </div>
-
-                <div class="kid-card">
-                    <div class="q-title">Contoh 1: Mengenali Pecahan</div>
-                    <div class="q-text">Kue di bawah ini dibagi menjadi dua bagian yang sama besar. Satu bagian yang diarsir warna merah muda bernilai...</div>
-                    <div class="visual-container">
-                        <svg width="120" height="120" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="#f8d7da" stroke="#dc3545" stroke-width="2"/>
-                            <path d="M50,5 A45,45 0 0,1 50,95 Z" fill="#dc3545" />
-                        </svg>
-                    </div>
-                    <div class="options-grid">
-                        <button class="opt-btn correct" disabled>A. 1/2 <span>✓</span></button>
-                        <button class="opt-btn" disabled>B. 1/3</button>
-                        <button class="opt-btn" disabled>C. 1/4</button>
-                        <button class="opt-btn" disabled>D. 2/2</button>
-                    </div>
-                    <div class="explanation show">
-                        <strong>Penjelasan:</strong> Kue dibagi menjadi 2 potong yang sama besar. Bagian yang diarsir merah adalah 1 dari total 2 potong, sehingga nilai pecahannya adalah 1/2.
-                    </div>
-                </div>
-
-                <div class="kid-card">
-                    <div class="q-title">Contoh 2: Membandingkan Pecahan</div>
-                    <div class="q-text">Manakah potongan kue brownies yang lebih besar, potongan yang bernilai 1/2 atau 1/4?</div>
-                    <div class="visual-container" style="display:flex; justify-content:center; gap:30px; align-items:flex-end;">
-                        <div>
-                            <svg width="100" height="60" viewBox="0 0 100 60">
-                                <rect x="0" y="0" width="100" height="60" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                                <rect x="0" y="0" width="50" height="60" fill="#8b5a2b"/>
-                            </svg>
-                            <div style="font-weight:bold; margin-top:8px;">Brownies 1/2</div>
-                        </div>
-                        <div>
-                            <svg width="100" height="60" viewBox="0 0 100 60">
-                                <rect x="0" y="0" width="100" height="60" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                                <rect x="0" y="0" width="25" height="60" fill="#8b5a2b"/>
-                                <line x1="25" y1="0" x2="25" y2="60" stroke="#fff" stroke-width="1"/>
-                                <line x1="50" y1="0" x2="50" y2="60" stroke="#fff" stroke-width="1"/>
-                                <line x1="75" y1="0" x2="75" y2="60" stroke="#fff" stroke-width="1"/>
-                            </svg>
-                            <div style="font-weight:bold; margin-top:8px;">Brownies 1/4</div>
-                        </div>
-                    </div>
-                    <div class="options-grid">
-                        <button class="opt-btn correct" disabled>A. 1/2 lebih besar <span>✓</span></button>
-                        <button class="opt-btn" disabled>B. 1/4 lebih besar</button>
-                        <button class="opt-btn" disabled>C. Sama besar</button>
-                        <button class="opt-btn" disabled>D. Tidak bisa dibandingkan</button>
-                    </div>
-                    <div class="explanation show">
-                        <strong>Penjelasan:</strong> Potongan 1/2 (setengah) lebih besar dari 1/4 (seperempat). Karena saat sebuah kue dibagi menjadi lebih sedikit bagian, ukuran tiap potongannya akan menjadi lebih besar.
-                    </div>
-                </div>
+                </div>  
+                <!-- LATIHAN SOAL -->
+                <h2 style="font-family:'Baloo 2'; color:var(--forest-dark); margin-top:24px; border-bottom:3px solid var(--leaf-vivid); padding-bottom:8px; margin-bottom: 24px;"><span class="wiggle">✨</span> Ayo Berlatih!</h2>
+        
                 
-                <div style="text-align:right; margin-top:20px;">
-                    <button class="btn-primary" onclick="showTab('tab-mudah')">Lanjut ke Level Mudah ➡️</button>
-                </div>
-            </div>
-
-            <!-- TAB MUDAH -->
-            <div id="tab-mudah" class="tab-content">
                 <div class="kid-card">
                     <div class="q-title">Soal 1</div>
-                    <div class="q-text">Pizza di bawah ini dipotong menjadi 2 bagian yang sama besar. Jika satu potong diambil, maka nilai pecahan bagian yang diambil adalah...</div>
-                    <div class="visual-container">
-                        <svg width="120" height="120" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
-                            <path d="M50,5 A45,45 0 0,1 50,95 Z" fill="#ffc107" />
-                            <line x1="50" y1="5" x2="50" y2="95" stroke="#d39e00" stroke-width="2"/>
-                        </svg>
+                    <div class="q-text">Perhatikan gambar brownis berikut!<br>Sebuah kue brownies dipotong menjadi 4 bagian yang sama besar<br>Dari keempat potongan tersebut, ada 3 potongan yang diberi topping cokelat choco chips di atasnya, sedangkan potongan terakhir diberi krim vanilla putih.<br>Berapakah nilai pecahan yang menunjukkan potongan brownies dengan topping cokelat?</div>
+                    <div class="visual-container" style="text-align:center; margin:16px 0;">
+                        <img src="img/no2.png" alt="Gambar Brownis" style="max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); max-height:200px;">
                     </div>
                     <div class="options-grid">
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/3</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 1/2</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 1/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 2/2</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/4</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">B. 2/4</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">C. 3/4</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 4/4</button>
                     </div>
                     <div class="explanation">
-                        <strong>Penjelasan:</strong> Pizza dipotong menjadi 2 (penyebut = 2), dan 1 potong diambil (pembilang = 1). Jadi nilai pecahannya adalah 1/2.
+                        <strong>Penjelasan:</strong> Jumlah seluruh bagian brownies ada 4 bagian (taruh angka 4 di bawah sebagai penyebut).
+
+Jumlah bagian brownies yang diberi topping coklat ada 3 bagian (taruh angka 3 di atas sebagai pembilang).
+
+Maka, pecahan brownies yang diberi topping coklat adalah 3/4.
                     </div>
                 </div>
                 
+                <!-- CONTINUATION -->
                 <div class="kid-card">
                     <div class="q-title">Soal 2</div>
-                    <div class="q-text">Terdapat 4 lampion yang digantung, dan hanya 2 lampion yang menyala (berwarna kuning). Pecahan yang menunjukkan lampion menyala adalah...</div>
-                    <div class="visual-container">
-                        <svg width="200" height="70" viewBox="0 0 200 70">
-                            <!-- lit -->
-                            <rect x="20" y="10" width="25" height="40" rx="5" fill="#ffc107" stroke="#d39e00" stroke-width="2"/>
-                            <rect x="60" y="10" width="25" height="40" rx="5" fill="#ffc107" stroke="#d39e00" stroke-width="2"/>
-                            <!-- unlit -->
-                            <rect x="100" y="10" width="25" height="40" rx="5" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                            <rect x="140" y="10" width="25" height="40" rx="5" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                            <!-- wire -->
-                            <path d="M0,5 Q100,20 200,5" fill="none" stroke="#6c757d" stroke-width="2"/>
-                            <line x1="32" y1="8" x2="32" y2="10" stroke="#6c757d" stroke-width="2"/>
-                            <line x1="72" y1="12" x2="72" y2="10" stroke="#6c757d" stroke-width="2"/>
-                            <line x1="112" y1="12" x2="112" y2="10" stroke="#6c757d" stroke-width="2"/>
-                            <line x1="152" y1="8" x2="152" y2="10" stroke="#6c757d" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div class="options-grid">
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 2/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 3/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 4/4</button>
+                    <div class="q-text">Ibu memotong semangka menjadi 8 bagian. Jika 2 bagian sudah dimakan, maka berapakah pecahan semangka yang dimakan?</div>
+                    <div class="options-grid" style="margin-top:20px;">
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 2/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 3/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 8/8</button>
                     </div>
                     <div class="explanation">
-                        <strong>Penjelasan:</strong> Ada total 4 lampion (penyebut = 4), dan yang menyala ada 2 buah (pembilang = 2). Sehingga pecahannya adalah 2/4 (yang juga senilai dengan 1/2).
+                        <strong>Penjelasan Cara Mengerjakan:</strong><br>
+                        • Jumlah seluruh potongan semangka yang dipotong Ibu ada 8 bagian (taruh angka 8 di bawah sebagai penyebut). <br>
+                        • Jumlah semangka yang sudah dimakan ada 2 bagian (taruh angka 2 di atas sebagai pembilang). <br>
+                        Maka, pecahan semangka yang dimakan adalah 2/8.
                     </div>
                 </div>
                 
-                <div style="text-align:right; margin-top:20px;">
-                    <button class="btn-primary" onclick="showTab('tab-sedang')">Lanjut ke Level Sedang ➡️</button>
-                </div>
-            </div>
-
-            <!-- TAB SEDANG -->
-            <div id="tab-sedang" class="tab-content">
                 <div class="kid-card">
                     <div class="q-title">Soal 3</div>
-                    <div class="q-text">Kakak mempunyai sepiring apel. Apel dibagi menjadi 4 bagian sama. Kakak makan 2 bagian. Kakak harus makan berapa bagian lagi agar apel habis?</div>
-                    <div class="visual-container">
-                        <svg width="120" height="120" viewBox="0 0 100 100">
-                            <!-- outline -->
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#dc3545" stroke-width="2" stroke-dasharray="4"/>
-                            <!-- remaining 2/4 (half) -->
-                            <path d="M50,10 A40,40 0 0,1 50,90 A40,40 0 0,1 10,50 A40,40 0 0,1 50,10" fill="#dc3545" transform="rotate(45, 50, 50)"/>
-                            <path d="M50,10 A40,40 0 0,0 50,90 Z" fill="#dc3545" transform="rotate(-45, 50, 50)"/>
-                            <path d="M10,50 A40,40 0 0,0 50,90 L50,50 Z" fill="#dc3545" />
-                            <path d="M90,50 A40,40 0 0,1 50,90 L50,50 Z" fill="#dc3545" />
-                            <!-- clear out top half to leave bottom half which is 2/4 -->
-                            <path d="M10,50 A40,40 0 0,1 90,50 Z" fill="#ffffff" stroke="#dc3545" stroke-width="2" stroke-dasharray="4"/>
-                            <line x1="50" y1="50" x2="50" y2="90" stroke="#fff" stroke-width="2"/>
-                            <!-- leaf -->
-                            <path d="M50,10 Q60,0 70,10 Q60,15 50,10" fill="#28a745"/>
-                        </svg>
-                    </div>
-                    <div class="options-grid">
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 2/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 3/4</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 4/4</button>
+                    <div class="q-text">Di halaman belakang rumah kakek terdapat kebun buah yang cukup luas. Di dalam kebun itu, ada 12 pohon mangga yang ditanam berbaris rapi. Saat musim panen tiba, kakek melihat ada 9 pohon mangga yang sudah berbuah lebat, sedangkan sisanya belum berbuah. Berapakah pecahan yang menunjukkan banyaknya pohon mangga yang sudah berbuah dibandingkan dengan seluruh pohon mangga yang ada di kebun kakek?</div>
+                    <div class="options-grid" style="margin-top:20px;">
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 3/12</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 9/12</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 12/9</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 6/12</button>
                     </div>
                     <div class="explanation">
-                        <strong>Penjelasan:</strong> Apel tersisa 2 dari 4 bagian (2/4). Agar habis, Kakak harus memakan semua sisa tersebut yaitu 2 bagian (2/4).
+                        <strong>Penjelasan Cara Mengerjakan:</strong><br>
+                        • Jumlah seluruh pohon mangga di kebun kakek adalah 12 pohon (menjadi penyebut di bawah). <br>
+                        • Jumlah pohon mangga yang sudah berbuah adalah 9 pohon (menjadi pembilang di atas). <br>
+                        Satukan keduanya menjadi bentuk pecahan, yaitu 9/12.
+                    </div>
+                </div>
+
+                <div class="kid-card">
+                    <div class="q-title">Soal 4</div>
+                    <div class="q-text">Bayangkan kamu punya sebuah pizza besar berbentuk lingkaran seperti pada gambar. Pizza tersebut dipotong menjadi 8 bagian yang sama besar. Kakak kemudian mengambil dan memakan 2 bagian yang diarsir warna hijau. Berapakah nilai pecahan untuk bagian pizza yang berwarna hijau tersebut?</div>
+                    <div class="visual-container" style="text-align:center; margin:16px 0;">
+                        <img src="img/no4.png" alt="Gambar Pizza" style="max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); max-height:200px;">
+                    </div>
+                    <div class="options-grid">
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 2/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 3/8</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 4/8</button>
+                    </div>
+                    <div class="explanation">
+                        <strong>Penjelasan Cara Mengerjakan:</strong><br>
+                        • Pertama, hitung seluruh kotak potongan dalam lingkaran tersebut. Jika dihitung, totalnya ada 8 kotak (ini menjadi Penyebut atau angka di bawah). <br>
+                        • Kedua, hitung berapa kotak yang diberi warna hijau (diarsir). Jika dihitung, ada 2 kotak hijau (ini menjadi Pembilang atau angka di atas). <br>
+                        Gabungkan keduanya: angka 2 di atas dan angka 8 di bawah, ditulis menjadi 2/8.
                     </div>
                 </div>
                 
-                <div style="text-align:right; margin-top:20px;">
-                    <button class="btn-primary" onclick="showTab('tab-sulit')">Lanjut ke Level Sulit ➡️</button>
-                </div>
-            </div>
-
-            <!-- TAB SULIT -->
-            <div id="tab-sulit" class="tab-content">
+                <!-- CONTINUATION -->
                 <div class="kid-card">
                     <div class="q-title">Soal 5</div>
-                    <div class="q-text">Ayah membeli brownies yang dibagi menjadi 6 bagian sama. Hari pertama dimakan 2 bagian, hari kedua dimakan 1 bagian. Berapa sisa brownies yang belum dimakan?</div>
-                    <div class="visual-container">
-                        <svg width="240" height="80" viewBox="0 0 150 50">
-                            <!-- outline for 6 -->
-                            <rect x="0" y="0" width="150" height="50" fill="none" stroke="#6c757d" stroke-width="2" stroke-dasharray="4"/>
-                            <!-- 3 remaining -->
-                            <rect x="0" y="0" width="75" height="50" fill="#8b5a2b"/>
-                            <!-- slice dividers -->
-                            <line x1="25" y1="0" x2="25" y2="50" stroke="#fff" stroke-width="1.5"/>
-                            <line x1="50" y1="0" x2="50" y2="50" stroke="#fff" stroke-width="1.5"/>
-                            <line x1="75" y1="0" x2="75" y2="50" stroke="#fff" stroke-width="1.5"/>
-                            <line x1="100" y1="0" x2="100" y2="50" stroke="#6c757d" stroke-width="1.5" stroke-dasharray="2"/>
-                            <line x1="125" y1="0" x2="125" y2="50" stroke="#6c757d" stroke-width="1.5" stroke-dasharray="2"/>
-                        </svg>
-                    </div>
+                    <div class="q-text">Fajar, Roni, dan Siska masing-masing mendapatkan satu batang cokelat yang ukurannya sama persis dari ibu. Cokelat mereka masing-masing sudah dibagi menjadi 10 kotak kecil.<br>Fajar memakan 7/10 bagian cokelatnya.<br>Roni memakan 5/10 bagian cokelatnya.<br>Siska memakan 8/10 bagian cokelatnya.<br>Jika kita melihat bagian yang mereka makan, siapakah anak yang memakan bagian cokelat paling banyak atau paling rakus?</div>
                     <div class="options-grid">
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 2/6</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 3/6</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 4/6</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 1/6</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. Fajar</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">B. Roni</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">C. Siska</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. Fajar dan Roni</button>
                     </div>
                     <div class="explanation">
-                        <strong>Penjelasan:</strong> Kue awalnya ada 6 potong (6/6). Dimakan total 2 + 1 = 3 potong (3/6). Maka sisa brownies yang belum dimakan adalah 6/6 - 3/6 = 3/6.
+                        <strong>Penjelasan Cara Mengerjakan:</strong><br>
+                        • Karena semua pecahan memiliki angka bawah (penyebut) yang sama-sama 10, kita tidak perlu pusing memikirkan ukuran potongannya karena sudah pasti sama besar.<br> 
+                        • Kita hanya perlu melihat dan membandingkan angka yang ada di atas (pembilang), yaitu: 7 (Fajar), 5 (Roni), dan 8 (Siska). <br>
+                        Angka yang paling besar di antara 7, 5, dan 8 adalah 8. Karena angka 8 adalah bagian yang dimakan oleh Siska, maka Siskalah yang memakan cokelat paling banyak.
                     </div>
                 </div>
 
                 <div class="kid-card">
                     <div class="q-title">Soal 6</div>
-                    <div class="q-text">Ibu mempunyai 2 buah kue yang sama besar. Kue pertama dibagi 4 bagian dan dimakan 1 bagian. Kue kedua dibagi 3 bagian dan dimakan 1 bagian. Potongan mana yang lebih besar?</div>
-                    <div class="visual-container" style="display:flex; justify-content:center; gap:20px; align-items:center;">
-                        <div>
-                            <svg width="80" height="80" viewBox="0 0 60 60">
-                                <circle cx="30" cy="30" r="28" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                                <path d="M30,2 A28,28 0 0,1 58,30 L30,30 Z" fill="#fd7e14"/>
-                            </svg>
-                            <div style="font-weight:bold; margin-top:8px;">Kue Pertama (1/4)</div>
-                        </div>
-                        <div style="font-size:3rem; font-weight:bold; color:var(--text-secondary)">VS</div>
-                        <div>
-                            <svg width="80" height="80" viewBox="0 0 60 60">
-                                <circle cx="30" cy="30" r="28" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
-                                <path d="M30,2 L30,30 L54,44 A28,28 0 0,0 30,2 Z" fill="#6f42c1"/>
-                            </svg>
-                            <div style="font-weight:bold; margin-top:8px;">Kue Kedua (1/3)</div>
-                        </div>
-                    </div>
-                    <div class="options-grid">
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 1/4 lebih besar</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">B. Keduanya sama besar</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, true)">C. 1/3 lebih besar</button>
-                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. Tidak bisa dibandingkan</button>
+                    <div class="q-text">Ibu guru menuliskan lima angka pecahan secara acak di papan tulis, yaitu: 1/7, 4/7, 2/7, 6/7, dan 3/7. Ibu guru meminta kamu untuk menyusun kembali pecahan-pecahan tersebut mulai dari yang nilainya paling kecil hingga ke yang paling besar.<br><br>Setelah kamu berhasil menyusunnya dengan rapi, pecahan manakah yang posisinya berada tepat di tengah-tengah urutan?</div>
+                    <div class="options-grid" style="margin-top:20px;">
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">A. 2/7</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, true)">B. 3/7</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">C. 4/7</button>
+                        <button class="opt-btn" onclick="cekJawaban(this, false)">D. 6/7</button>
                     </div>
                     <div class="explanation">
-                        <strong>Penjelasan:</strong> Kue yang dibagi 3 bagian memiliki ukuran tiap potongan yang lebih besar daripada kue yang dibagi menjadi 4 bagian. Jadi, potongan 1/3 lebih besar dari 1/4.
+                        <strong>Penjelasan Cara Mengerjakan:</strong><br>
+                        • Perhatikan bahwa semua pecahan memiliki penyebut yang sama, yaitu 7. Jadi, kita cukup mengurutkan angka pembilangnya (angka yang di atas) dari yang paling kecil ke yang paling besar.<br> 
+                        • Angka pembilang yang kita punya adalah: 1, 4, 2, 6, dan 3. Jika diurutkan dari yang terkecil, menjadi: 1, 2, 3, 4, 6.<br> 
+                        Lalu tulis kembali dalam bentuk pecahan yang sudah rapi berurutan. Dari kelima pecahan di atas, pecahan yang berada di posisi nomor tiga atau tepat di tengah-tengah adalah 3/7. 
                     </div>
                 </div>
                 
-                <div style="text-align:center; margin-top:30px;">
-                    <button class="btn-primary" onclick="selesaiGame()">Selesai & Lanjut Kuis 🚀</button>
+                <div style="text-align:center; margin-top:40px; padding: 30px; background: rgba(255,255,255,0.8); border-radius: 12px; border: 2px dashed var(--leaf-vivid);">
+                    <h3 style="font-family:'Baloo 2'; color:var(--forest-dark); margin-bottom:15px; font-size: 1.8rem;">Hebat! Kamu sudah menyelesaikan semua latihan! 🎉</h3>
+                    <button class="btn-primary" onclick="selesaiGame()" style="font-size: 1.2rem; padding: 12px 30px;">Selesai & Kembali ke Menu 🚀</button>
                 </div>
             </div>
             
@@ -314,20 +194,6 @@
     </main>
 
     <script>
-        function showTab(tabId) {
-            // Hide all contents and remove active class from buttons
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            // Show selected tab content and add active class to button
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-            
-            // Optional: play click sound if AudioManager exists
-            if (typeof AudioManager !== 'undefined' && typeof AudioManager.playClick === 'function') {
-                AudioManager.playClick();
-            }
-        }
 
         function cekJawaban(btnElement, isCorrect) {
             const grid = btnElement.closest('.options-grid');
