@@ -108,7 +108,7 @@
             margin-top: 5px; 
         }
 
-        /* Khusus untuk menengahkan satu kartu (Dr. Fara) */
+        /* Centering untuk grid Dr. Fara */
         .dev-grid-center {
             display: flex;
             justify-content: center;
@@ -117,7 +117,18 @@
             margin-top: 5px;
         }
         .dev-grid-center .dev-member {
-            width: 180px; /* Ukuran proporsional agar tidak terlalu lebar */
+            width: 180px;
+        }
+
+        /* Label Peran di Atas Foto */
+        .member-title-top {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--forest-mid);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
         }
 
         .dev-member { 
@@ -225,9 +236,12 @@
                     <div class="team-badge">🌿 Tim Penyusun</div>
                     <div class="dev-grid-center">
                         <div class="dev-member">
-                            <div class="dev-ava"><img src="img/fara.jpg" alt="Dr. Fara"></div>
-                            <div class="dev-name">Dr. Fara Virgianita Pangadongan, M. Pd.</div>
-                            <div class="dev-nim">NIP: 199003242023212030</div>
+                            <div>
+                                <span class="member-title-top">Dosen Pembina</span>
+                                <div class="dev-ava"><img src="img/fara.jpg" alt="Dr. Fara"></div>
+                                <div class="dev-name">Dr. Fara Virgianita Pangadongan, M. Pd.</div>
+                                <div class="dev-nim">NIP: 199003242023212030</div>
+                            </div>
                         </div>
                     </div> 
                 </div>
@@ -286,7 +300,7 @@
                             <div>
                                 <div class="dev-ava"><img src="img/delon.jpg" alt="Delon"></div>
                                 <div class="dev-name">Chornelius Delon</div>
-                                <div class="dev-nim">2343087</div>
+                                <div class="dev-nim">2343089</div>
                             </div>
                             <div>
                                 <div class="dev-univ">STMIK WIDYA CIPTA DHARMA</div>
