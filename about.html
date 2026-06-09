@@ -49,25 +49,14 @@
             text-align: left;
             transition: transform 0.2s ease;
         }
-        .reviewer-card:hover {
-            transform: translateY(-2px);
-        }
+        .reviewer-card:hover { transform: translateY(-2px); }
         .reviewer-card:last-child { margin-bottom: 0; }
         
         .reviewer-card.border-brown { border-left: 5px solid #b35c24; }
         .reviewer-card.border-green { border-left: 5px solid #27ae60; }
         .reviewer-card.border-blue { border-left: 5px solid #2980b9; }
 
-        .reviewer-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
+        .reviewer-icon { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
         .reviewer-card.border-brown .reviewer-icon { background: #fdf5ef; }
         .reviewer-card.border-green .reviewer-icon { background: #effdf4; }
         .reviewer-card.border-blue .reviewer-icon { background: #eff7fd; }
@@ -117,6 +106,18 @@
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
             gap: 15px; 
             margin-top: 5px; 
+        }
+
+        /* Khusus untuk menengahkan satu kartu (Dr. Fara) */
+        .dev-grid-center {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        .dev-grid-center .dev-member {
+            width: 180px; /* Ukuran proporsional agar tidak terlalu lebar */
         }
 
         .dev-member { 
@@ -221,14 +222,19 @@
                 </div>
                 
                 <div class="team-wrapper">
-                    <div class="team-badge">🌿 Tim Pengembang Inti</div>
-                    <div class="dev-grid">
+                    <div class="team-badge">🌿 Tim Penyusun</div>
+                    <div class="dev-grid-center">
                         <div class="dev-member">
                             <div class="dev-ava"><img src="img/fara.jpg" alt="Dr. Fara"></div>
                             <div class="dev-name">Dr. Fara Virgianita Pangadongan, M. Pd.</div>
                             <div class="dev-nim">NIP: 199003242023212030</div>
                         </div>
+                    </div> 
+                </div>
 
+                <div class="team-wrapper">
+                    <div class="team-badge">👥 Tim Penyusun Inti</div>
+                    <div class="dev-grid">
                         <div class="dev-member">
                             <div class="dev-ava"><img src="img/andi.jpg" alt="Andi"></div>
                             <div class="dev-name">Andi M. Afif Aditya</div>
@@ -280,7 +286,7 @@
                             <div>
                                 <div class="dev-ava"><img src="img/delon.jpg" alt="Delon"></div>
                                 <div class="dev-name">Chornelius Delon</div>
-                                <div class="dev-nim">2343089</div>
+                                <div class="dev-nim">2343087</div>
                             </div>
                             <div>
                                 <div class="dev-univ">STMIK WIDYA CIPTA DHARMA</div>
